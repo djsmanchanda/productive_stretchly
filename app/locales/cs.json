@@ -1,12 +1,12 @@
 {
   "main": {
     "toolTipHeader": "Stretchly – Pamatuje na přestávky za Vás",
-    "microbreakIn": "Mini Přestávka za $t(utils.seconds, {'count': {{seconds}} })",
-    "breakIn": "Dlouhá Přestávka za $t(utils.seconds, {'count': {{seconds}} })",
+    "microbreakIn": "Mini přestávka za $t(utils.seconds, {'count': {{seconds}} })",
+    "breakIn": "Dlouhá přestávka za $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Obnovení přestávek",
     "downloadLatestVersion": "Stáhnout nejnovější verzi",
-    "toBreak": "Dlouhou Přestávku",
-    "toMicrobreak": "Mini Přestávku",
+    "toBreak": "Dlouhou přestávku",
+    "toMicrobreak": "Mini přestávku",
     "skipToTheNext": "Přeskočit na další",
     "resume": "Pokračovat v přestávkách",
     "pause": "Přerušit přestávky",
@@ -17,19 +17,20 @@
     "indefinitely": "Na neurčito",
     "resetBreaks": "Resetovat přestávky",
     "quitStretchly": "Ukončit Stretchly",
-    "restoreDefaults": "Obnovit původní nastavení",
+    "restoreDefaults": "Obnovit výchozí nastavení",
     "areYouSure": "Tato akce obnoví původní nastavení a všechny vaše změny budou ztraceny.",
     "continue": "Pokračovat",
     "cancel": "Zrušit",
-    "preferences": "Nastavení",
+    "preferences": "Předvolby",
     "contributorPreferences": "Nastavení pro přispěvatele",
     "syncPreferences": "Synchronizace nastavení",
-    "warning": "Tím se obnoví původní nastavení aplikace a všechna vaše nastavení budou ztracena."
+    "warning": "Tím se obnoví původní nastavení aplikace a všechna vámi provedená budou ztracena."
   },
   "break": {
     "postpone": "Odložit tuto přestávku",
     "skip": "Přeskočit tuto přestávku",
-    "title": "Čas na přestávku!"
+    "title": "Čas na přestávku!",
+    "finish": "Dokončit tuto přestávku"
   },
   "preferences": {
     "title": "Nastavení Stretchly",
@@ -53,22 +54,22 @@
       "restoreDefaults": "Obnovit původní nastavení"
     },
     "schedule": {
-      "miniBreaks": "Mini Přestávky:",
-      "miniBreaksInfo": "Mini Přestávky jsou kratší a častejší přestávky, které vám umožní oddechnout si, natáhnout se a relaxovat.",
-      "enableMiniBreaks": "Povolit Mini Přestávky",
+      "miniBreaks": "Mini přestávky:",
+      "miniBreaksInfo": "Mini přestávky jsou kratší a častější přestávky, které vám umožní oddechnout si, natáhnout se a relaxovat.",
+      "enableMiniBreaks": "Povolit Mini přestávky",
       "breakFor": "Dopřát si přestávku:",
       "every": "Každých:",
-      "showNotificationBeforeMiniBreak": "Zobrazit před začátkem Mini Přestávky upozornění",
-      "enablePostponeMini": "Umožnit odložení Mini Přestávky",
-      "longBreaks": "Dlouhé Přestávky:",
-      "longBreaksInfo": "Dlouhé Přestávky nejsou tak časté, ale za to trvají delší dobu, takže umožní si lépe odpočinout od vaší práce.",
-      "enableLongBreaks": "Povolit Dlouhé Přestávky",
-      "showNotificationBeforeLongBreak": "Zobrazit před začátkem Dlouhé Přestávky upozornění",
-      "enablePostponeLong": "Umožnit odložení Dlouhé Přestávky",
-      "strictMode": "Přísný Režim:",
-      "strictModeInfo": "Přísný Režim vám neumožní přestávky přeskakovat a pomůže tak vaší disciplíně.",
-      "enableStrictMini": "Zapnout Přísný Režim pro Mini Přestávky",
-      "enableStrictLong": "Zapnout Přísný Režim pro Dlouhé Přestávky",
+      "showNotificationBeforeMiniBreak": "Zobrazit před začátkem Mini přestávky upozornění",
+      "enablePostponeMini": "Umožnit odložení Mini přestávky",
+      "longBreaks": "Dlouhé přestávky:",
+      "longBreaksInfo": "Dlouhé přestávky nejsou tak časté, ale trvají delší dobu, takže vám umožní lépe si odpočinout od práce.",
+      "enableLongBreaks": "Povolit Dlouhé přestávky",
+      "showNotificationBeforeLongBreak": "Zobrazit před začátkem Dlouhé přestávky upozornění",
+      "enablePostponeLong": "Umožnit odložení Dlouhé přestávky",
+      "strictMode": "Přísný režim:",
+      "strictModeInfo": "Přísný režim vám neumožní přestávky přeskakovat a pomůže tak vaší disciplíně.",
+      "enableStrictMini": "Zapnout Přísný režim pro Mini přestávky",
+      "enableStrictLong": "Zapnout Přísný režim pro Dlouhé přestávky",
       "cantDisableBoth": "Není možné vypnout oba druhy přestávek"
     },
     "theme": {
@@ -84,12 +85,17 @@
       "crystalGlass": "Křišťál",
       "windChime": "Zvonkohra",
       "ticToc": "Tik tak",
-      "menubarIcon": "Ikonka:",
+      "silence": "Ticho",
+      "trayIcon": "Ikonka:",
       "colour": "Barevná",
       "monochrome": "Černobílá",
       "invertedMonochrome": "Převrácená černobílá",
       "snowWhite": "Sněhobílá",
-      "reverie": "Zátiší"
+      "reverie": "Zátiší",
+      "trayIconStyleLabel": "Styl:",
+      "trayIconStyleDefault": "Výchozí",
+      "trayIconStyleTime": "Čas na přestávku",
+      "trayIconStyleProgress": "Postup k přestávce"
     },
     "about": {
       "tagline": "Pamatuje na přestávky za vás",
@@ -108,7 +114,7 @@
       "loveStretchly": "Chcete Stretchly pomoci?",
       "desc1": "Přestávky během práce s počítačem jsou vědecky ověřenou metodou na zlepšení fyzického i psychického zdraví.",
       "desc2": "Stretchly je zdarma. Můžete však věnovat svůj čas nebo peníze a pomoci tak ke zlepšení Stretchly a dalších programů.",
-      "becomePatron": "Staňte se Patronem",
+      "becomeContributor": "Staňte se Patronem",
       "alreadyContributor": "Už jsem přispěl/a",
       "authenticateUsing": "Autentifikovat pomocí:",
       "contributorPreferences": "Nastavení pro přispěvatele",
@@ -124,21 +130,21 @@
     "title": "Nastavení pro přispěvatele",
     "notifications": "Upozornění na přestávku:",
     "notificationsInfo": "Systémová notifikace zobrazená krátce před přestávkou, která vám umožní se na ni lépe připravit.",
-    "beforeLongBreak": "Dlouhá Přestávka:",
-    "beforeMiniBreak": "Mini Přestávka:",
+    "beforeLongBreak": "Dlouhá přestávka:",
+    "beforeMiniBreak": "Mini přestávka:",
     "newVersion": "Nová verze:",
     "newVersionNotification": "Upozornit na novou verzi",
     "customIdeas": "Vlastní nápady na přestávky:",
-    "customIdeasInfo": "Umožnuje použití vlastních nápadů na přestávky editováním konfiguračního souboru. (Pro pokročilé uživatele)",
+    "customIdeasInfo": "Umožňuje použití vlastních nápadů na přestávky editováním konfiguračního souboru. (Pro pokročilé uživatele)",
     "useIdeasFromSettings": "Použít nápady na přestávky z konfiguračního souboru",
     "breakPostpone": "Posunutí přestávek:",
     "breakPostponeInfo": "Pokud je v hlavním nastavení povoleno, můžete přestávku odložit. Následující nastavení vám umožní nastavit kdy, na jak dlouho a kolikrát je možné přestávku odložit.",
-    "miniBreaks": "Mini Přestávky:",
+    "miniBreaks": "Mini přestávky:",
     "postponableFor": "Můžou se odložit:",
     "postponeFor": "Odloží se o:",
     "maxPostpones": "Maximální doba odložení:",
-    "longBreaks": "Dlouhé Přestávky:",
-    "pauseUntilMoring": "Přerušení do rána:",
+    "longBreaks": "Dlouhé přestávky:",
+    "pauseUntilMorning": "Přerušení do rána:",
     "pauseUntil": "Přerušit do:",
     "pauseUntilMorningInfo": "Specifikujte hodinu pro 'Přerušit do rána'.",
     "welcomeWindow": "Úvodní obrazovka:",
@@ -152,8 +158,8 @@
     "breakWindowHeight": "Výška:",
     "sounds": "Zvuky:",
     "volume": "Hlasitost:",
-    "miniBreakStartSound": "Přehrát koncový zvuk i na začátku Mini Přestávky",
-    "longBreakStartSound": "Přehrát koncový zvuk i na začátku Dlouhé Přestávky",
+    "miniBreakStartSound": "Přehrát koncový zvuk i na začátku Mini přestávky",
+    "longBreakStartSound": "Přehrát koncový zvuk i na začátku Dlouhé přestávky",
     "naturalBreaks": "Přirozené přestávky:",
     "naturalBreaksInfo": "Pokud je v hlavním nastavení povoleno sledování neaktivity, můžete určit po jaké době by se měli přestávky přerušit.",
     "pauseAfter": "Přerušit po:",
@@ -170,11 +176,11 @@
     "showBreaksAsRegularWindowsTitle": "Chovat se jako běžné okno:",
     "currentTimeInBreaks": "Aktuální čas",
     "showCurrentTimeInBreaks": "Zobrazit aktuální místní čas v okně přestávky",
-    "showBreaksAsRegularWindowsInfo": "Pokud je tato funkce povolena, okna Přestávek se budou moci zaostřovat, nebudou již \"vždy nahoře\" a budou se také zobrazovat na hlavním panelu.",
+    "showBreaksAsRegularWindowsInfo": "Pokud je tato funkce povolena, okna přestávek se budou moci zaostřovat, nebudou již „vždy nahoře“ a budou se také zobrazovat na hlavním panelu.",
     "timeToBreakInTray": "Čas si dát přestávku",
     "showTimeToBreakInTray": "Zobrazit čas do další přestávky v ikoně na panelu nabídek",
     "showTrayIcon": "Zobrazit ikonu nabídky",
-    "toShowTrayIcon": "Zobrazit ikonu aplikace Stretchly v menu"
+    "toShowTrayIcon": "Zobrazit ikonu aplikace Stretchly v nabídce"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -196,6 +202,7 @@
     "hours_few": "{{count}} hodiny",
     "hours_other": "{{count}} hodin",
     "remaining": "{{count}} do konce",
+    "elapsed": "{{count}} od začátku",
     "inAbout": "za přibližně {{count}}"
   },
   "process": {
@@ -206,18 +213,18 @@
     "breakTimeReminderApp": "Pamatuje na přestávky za vás",
     "viewTutorial": "Zhlédnout Tutoriál",
     "openPreferences": "Otevřít Nastavení",
-    "getStarted": "Pokračovat"
+    "getStarted": "Začínáme"
   },
   "statusMessages": {
     "paused": "Přerušeny",
     "indefinitely": "Na neurčito",
     "dndMode": "Režim Nerušit",
-    "nextLongBreak": "Další Dlouhá Přestávka",
-    "nextMiniBreak": "Další Mini Přestávka",
-    "afterMiniBreak_one": "po {{count}} Mini Přestávce",
-    "afterMiniBreak_few": "po {{count}} Mini Přestávkách",
-    "afterMiniBreak_other": "po {{count}} Mini Přestávkách",
-    "resuming": "Obnovení přestávek",
+    "nextLongBreak": "Další Dlouhá přestávka",
+    "nextMiniBreak": "Další Mini přestávka",
+    "afterMiniBreak_one": "po {{count}} Mini přestávce",
+    "afterMiniBreak_few": "po {{count}} Mini přestávkách",
+    "afterMiniBreak_other": "po {{count}} Mini přestávkách",
+    "resuming": "Obnovování",
     "appExclusion": "Pravidlo pro vyloučení aplikace"
   },
   "miniBreakIdeas": {
@@ -515,6 +522,10 @@
     "abg": {
       "text": "Stiskněte pár sbalených ponožek nebo měkký gumový míček a vydržte tak po dobu 5 sekund, pak povolte. Celý proces několikrát zopakujte.",
       "title": "Stisk ruky"
+    },
+    "abj": {
+      "title": "Pod tlakem?",
+      "text": "Zkuste uzemňovací techniku 5-4-3-2-1: Najděte 5 věcí, které vidíte, 4 věci, kterých se můžete dotknout, 3 věci, které slyšíte, 2 věci, které cítíte, a 1 věc, kterou můžete ochutnat."
     }
   }
 }

@@ -19,7 +19,7 @@
     "welcomeWindow": "หน้าต่างต้อนรับ:",
     "pauseUntilMorningInfo": "ระบุเวลาว่าตัวเลือก \"หยุดชั่วคราวถึงเช้า\" จะสิ้นสุดเมื่อไหร่",
     "pauseUntil": "หยุดชั่วคราวจนถึง:",
-    "pauseUntilMoring": "หยุดชั่วคราวจนถึงเช้า:",
+    "pauseUntilMorning": "หยุดชั่วคราวจนถึงเช้า:",
     "longBreaks": "การพักใหญ่:",
     "maxPostpones": "เลื่อนได้มากสุด:",
     "postponeFor": "เลื่อนเป็นเวลา:",
@@ -51,7 +51,7 @@
       "contributorPreferences": "การตั้งค่าสำหรับผู้สนับสนุน",
       "authenticateUsing": "ยืนยันตัวตนด้วย:",
       "alreadyContributor": "ฉันร่วมสนับสนุนก่อนหน้านี้แล้ว",
-      "becomePatron": "ร่วมสนับสนุน",
+      "becomeContributor": "ร่วมสนับสนุน",
       "desc2": "Stretchly เป็นแอปฟรี แต่คุณสามารถช่วยเหลือเราได้ด้วยการบริจาค เพื่อให้เราสามารถปรับปรุง Stretchly และสร้างแอปฟรีอื่นๆ ได้เพิ่มเติม",
       "desc1": "มีหลักฐานทางวิทยาศาสตร์ยืนยันว่าการพักเป็นประจำระหว่างการใช้งานคอมพิวเตอร์เป็นสิ่งสำคัญต่อสุขภาพร่างกายและสุขภาพจิตใจที่ดี",
       "loveStretchly": "ชอบ Stretchly ใช่ไหม?"
@@ -74,7 +74,7 @@
       "invertedMonochrome": "ขาวดำแบบสลับสี",
       "monochrome": "ขาวดำ",
       "colour": "สี",
-      "menubarIcon": "ไอคอนบริเวณเมนูบาร์:",
+      "trayIcon": "ไอคอนบริเวณเมนูบาร์:",
       "ticToc": "ติ๊กตอก",
       "windChime": "กระดิ่งลม",
       "crystalGlass": "เคาะแก้ว",
@@ -171,7 +171,6 @@
     "paused": "หยุด",
     "dndMode": "อยู่ในโหมดห้ามรบกวน",
     "appExclusion": "แอพที่ได้รับยกเว้น",
-    "afterMiniBreak_one": "หลังจากการพักสั้นอีก {{count}} ครั้ง",
     "afterMiniBreak_other": "หลังจากการพักสั้นอีก {{count}} ครั้ง",
     "resuming": "ทำต่อ",
     "nextMiniBreak": "การพักสั้นครั้งหน้า",
@@ -249,6 +248,6 @@
     "newVersionAvailable": "เวอร์ชันใหม่ออกมาแล้ว!"
   },
   "utils": {
-    "none_one": "{{count}}"
+    "none_other": ""
   }
 }
