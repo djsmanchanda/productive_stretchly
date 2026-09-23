@@ -21,6 +21,7 @@ jobs:
     outputs:
       has_update: ${{ steps.sync.outputs.has_update }}
       branch: ${{ steps.sync.outputs.branch }}
+      upstream_update: ${{ steps.sync.outputs.upstream_update }}
     steps:
       - name: Checkout fork
         uses: actions/checkout@v6
@@ -38,9 +39,14 @@ jobs:
           git fetch upstream trunk
           git fetch origin fix/linux-multiscreen-break-windows
 
-          if git merge-base --is-ancestor upstream/trunk origin/fix/linux-multiscreen-break-windows && [[ "$VALIDATE_BRANCH" != "true" ]]; then
-            echo "has_update=false" >> "$GITHUB_OUTPUT"
-            exit 0
+          if git merge-base --is-ancestor upstream/trunk origin/fix/linux-multiscreen-break-windows; then
+            echo "upstream_update=false" >> "$GITHUB_OUTPUT"
+            if [[ "$VALIDATE_BRANCH" != "true" ]]; then
+              echo "has_update=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          else
+            echo "upstream_update=true" >> "$GITHUB_OUTPUT"
           fi
 
           branch=automation/upstream-sync
@@ -158,7 +164,7 @@ jobs:
 
   close-alert:
     needs: [prepare, test, merge]
-    if: success() && needs.prepare.outputs.has_update == 'true'
+    if: success() && needs.prepare.outputs.has_update == 'true' && needs.prepare.outputs.upstream_update == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Close resolved attention issue
