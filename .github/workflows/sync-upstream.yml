@@ -120,7 +120,7 @@ jobs:
           script: |
             const title = 'Upstream Stretchly sync needs attention'
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
-            const body = `The scheduled merge from hovancik/stretchly/trunk conflicted or did not pass the Linux/macOS/Windows checks. No upstream changes were applied to trunk.\n\nReview this run: ${runUrl}`
+            const body = `@${context.repo.owner} The automatic sync from hovancik/stretchly/trunk failed during merge preparation, the Linux/macOS/Windows checks, or the final push. Check the fork's trunk before retrying.\n\nReview this run: ${runUrl}`
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
