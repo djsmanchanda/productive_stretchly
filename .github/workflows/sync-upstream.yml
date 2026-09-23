@@ -98,13 +98,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fast-forward fork trunk after all checks pass
+      - name: Fast-forward fork fix branch after all checks pass
         env:
           BRANCH: ${{ needs.prepare.outputs.branch }}
         run: |
           set -euo pipefail
           git fetch origin fix/linux-multiscreen-break-windows "$BRANCH"
-          git switch --detach origin/trunk
+          git switch --detach origin/fix/linux-multiscreen-break-windows
           git merge --ff-only "origin/$BRANCH"
           git push origin HEAD:fix/linux-multiscreen-break-windows
           git push origin --delete "$BRANCH"
