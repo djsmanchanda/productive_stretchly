@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '15 9 * * *'
   workflow_dispatch:
+    inputs:
+      validate_branch:
+        description: 'Run the full cross-platform checks and Linux build on the current fix branch'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -24,13 +30,15 @@ jobs:
       - name: Prepare upstream merge candidate
         id: sync
         shell: bash
+        env:
+          VALIDATE_BRANCH: ${{ inputs.validate_branch || false }}
         run: |
           set -euo pipefail
           git remote add upstream https://github.com/hovancik/stretchly.git
           git fetch upstream trunk
           git fetch origin fix/linux-multiscreen-break-windows
 
-          if git merge-base --is-ancestor upstream/trunk origin/fix/linux-multiscreen-break-windows; then
+          if git merge-base --is-ancestor upstream/trunk origin/fix/linux-multiscreen-break-windows && [[ "$VALIDATE_BRANCH" != "true" ]]; then
             echo "has_update=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -87,6 +95,9 @@ jobs:
         run: xvfb-run -a dbus-run-session -- bash -lc 'npm run lint && npm test'
         env:
           DISPLAY: ':0'
+      - name: Build Linux app
+        if: runner.os == 'Linux'
+        run: npm run pack
 
   merge:
     needs: [prepare, test]
