@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Fixed
+- preserve Linux break window positions and label each target display in the window title for compositor-specific placement rules
+- add a `finish` command to close the active break without resetting the schedule
 - fix snap startup crash
 
 ## [1.22.1] - 2026-08-13

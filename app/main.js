@@ -151,6 +151,11 @@ if (!gotTheLock) {
         resetBreaks()
         break
 
+      case 'finish':
+        log.info('Stretchly: finishing current break (requested by second instance)')
+        finishCurrentBreak()
+        break
+
       case 'mini': {
         log.info('Stretchly: skip to Mini break (requested by second instance)')
         const delay = cmd.waitToMs()
@@ -862,6 +867,7 @@ function startMicrobreak () {
       if (event.sender !== microbreakWinLocal.webContents) return
       ipcMain.off('mini-break-loaded', onMiniBreakLoaded)
       log.info('Stretchly: Mini break window loaded')
+      if (process.platform === 'linux') microbreakWinLocal.setTitle(`Stretchly display ${localDisplayId}`)
       if (showBreaksAsRegularWindows) {
         microbreakWinLocal.show()
       } else {
@@ -882,7 +888,7 @@ function startMicrobreak () {
         breakPlanner.emit('microbreakStarted', true)
         log.info('Stretchly: starting Mini break')
       }
-      if (!settings.get('fullscreen') && process.platform !== 'darwin') {
+      if (!settings.get('fullscreen') && process.platform === 'win32') {
         setTimeout(() => {
           microbreakWinLocal.center()
         }, 0)
@@ -1031,6 +1037,7 @@ function startBreak () {
       if (event.sender !== breakWinLocal.webContents) return
       ipcMain.off('long-break-loaded', onLongBreakLoaded)
       log.info('Stretchly: Long break window loaded')
+      if (process.platform === 'linux') breakWinLocal.setTitle(`Stretchly display ${localDisplayId}`)
       if (showBreaksAsRegularWindows) {
         breakWinLocal.show()
       } else {
@@ -1052,7 +1059,7 @@ function startBreak () {
         log.info('Stretchly: starting Long break')
       }
 
-      if (!settings.get('fullscreen') && process.platform !== 'darwin') {
+      if (!settings.get('fullscreen') && process.platform === 'win32') {
         setTimeout(() => {
           breakWinLocal.center()
         }, 0)
@@ -1168,6 +1175,14 @@ function finishBreak (shouldPlaySound = true, shouldPlanNext = true) {
     breakPlanner.clear()
   }
   updateTray()
+}
+
+function finishCurrentBreak () {
+  if (microbreakWins) {
+    finishMicrobreak(false)
+  } else if (breakWins) {
+    finishBreak(false)
+  }
 }
 
 function postponeMicrobreak () {

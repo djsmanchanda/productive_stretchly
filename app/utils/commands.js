@@ -47,6 +47,9 @@ const allCommands = {
   reset: {
     description: 'Reset breaks'
   },
+  finish: {
+    description: 'Finish the current break'
+  },
   pause: {
     description: 'Pause breaks',
     options: [allOptions.duration]
@@ -105,6 +108,10 @@ const allExamples = [{
 {
   cmd: 'stretchly preferences',
   description: 'Open Preferences window'
+},
+{
+  cmd: 'stretchly finish',
+  description: 'Finish the current break'
 }]
 
 // Parse cmd line, check if valid and put variables in a dedicated object

@@ -165,6 +165,7 @@ When a Stretchly instance is running, the `stretchly` command can be use to inte
 The regular Windows installer adds `stretchly` to PATH, so commands can be run from a new terminal without specifying the full executable path.
 
 Type `stretchly help` to get a list of all commands and options available as well as some examples.
+Use `stretchly finish` to end the current break and continue the normal schedule.
 
 ## Preferences
 
@@ -596,7 +597,14 @@ You can help to translate Stretchly on [Weblate](https://hosted.weblate.org/enga
 - The end break shortcut is disabled on native Wayland because temporary global shortcuts cannot be reliably released. Use the break controls or start Stretchly with the X11 backend (`stretchly --ozone-platform=x11`). On KDE, remove any assignment created by an earlier Stretchly version once in System Settings > Keyboard > Shortcuts.
 - Windows Store build's autostart is not working, so was disabled. To use autostart, install Stretchly with the [regular installer](https://github.com/hovancik/stretchly/releases), or create a shortcut to Stretchly from `shell:AppsFolder` (Win+R) and move it to the `shell:startup` folder (Win+R).
 - The Snap build may fail to start on native Wayland. Start it with the X11 backend (`stretchly --ozone-platform=x11`) as a workaround. See [#1693](https://github.com/hovancik/stretchly/issues/1693).
-- Wayland multi-display window placement issue puts all break windows on one monitor; start with X11 backend (`stretchly --ozone-platform=x11`) if needed. See [electron/electron#48749](https://github.com/electron/electron/issues/48749).
+- Wayland compositors choose which monitor receives regular windows. Stretchly labels each Linux break window (`Stretchly display 0`, `Stretchly display 1`, etc.) so compositor-specific rules can route it to the matching monitor. For Hyprland, add rules like these and replace the output names with yours:
+
+  ```lua
+  hl.window_rule({ match = { class = "^stretchly$", initial_title = "^Stretchly display 0$" }, monitor = "eDP-1" })
+  hl.window_rule({ match = { class = "^stretchly$", initial_title = "^Stretchly display 1$" }, monitor = "HDMI-A-1" })
+  ```
+
+  If your compositor cannot apply per-window rules, start Stretchly with the X11 backend (`stretchly --ozone-platform=x11`). See [electron/electron#48749](https://github.com/electron/electron/issues/48749).
 
 ### MacOS
 - users experiencing their Dock hiding after a break, requiring command + tab or a mouse click to get focus back, check System Preferences > Users & Groups > {User} > Login Items. If Hide is checked for Stretchly, uncheck it, it should solve the issue.
