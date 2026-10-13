@@ -66,9 +66,6 @@ const allCommands = {
   skip: {
     description: 'Skip the currently running break, when allowed'
   },
-  finish: {
-    description: 'Finish the currently running break, when allowed'
-  },
   mini: {
     description: 'Skip to the Mini break, customize it',
     options: [allOptions.title, allOptions.noskip, allOptions.wait]
@@ -105,10 +102,6 @@ const allExamples = [{
 {
   cmd: 'stretchly skip',
   description: 'Skip the currently running break using existing preferences'
-},
-{
-  cmd: 'stretchly finish',
-  description: 'Finish the break after its countdown in Manual Finish mode'
 },
 {
   cmd: 'stretchly mini -T "Stretch up!"',

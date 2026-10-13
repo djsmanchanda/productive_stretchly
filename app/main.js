@@ -190,8 +190,7 @@ if (!gotTheLock) {
         break
 
       case 'postpone':
-      case 'skip':
-      case 'finish': {
+      case 'skip': {
         log.info(`Stretchly: requesting to ${cmd.command} the current break (requested by second instance)`)
         const reference = breakPlanner?.scheduler?.reference
         let windows
