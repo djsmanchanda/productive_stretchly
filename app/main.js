@@ -17,8 +17,7 @@ import { DateTime } from 'luxon'
 
 import {
   canPostpone, canSkip, formatTimeRemaining,
-  minutesRemaining, insideWindowsStore, insideFlatpak, insideSnap, insideWindowsPortable,
-  getLinuxDisplayBackend
+  minutesRemaining, insideWindowsStore, insideFlatpak, insideSnap, insideWindowsPortable
 } from './utils/utils.js'
 import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
@@ -91,7 +90,6 @@ let updateChecker
 let currentTrayIconPath = null
 let currentTrayMenuTemplate = null
 let trayUpdateIntervalObj = null
-let endBreakShortcutSupported
 
 if (insideWindowsPortable()) {
   const portableDataPath = join(process.env.PORTABLE_EXECUTABLE_DIR, 'Data')
@@ -191,6 +189,29 @@ if (!gotTheLock) {
         else pauseBreaks(1)
         break
 
+      case 'postpone':
+      case 'skip':
+      case 'finish': {
+        log.info(`Stretchly: requesting to ${cmd.command} the current break (requested by second instance)`)
+        const reference = breakPlanner?.scheduler?.reference
+        let windows
+        if (reference === 'finishMicrobreak') {
+          windows = microbreakWins
+        } else if (reference === 'finishBreak') {
+          windows = breakWins
+        }
+        const win = windows?.find(win =>
+          !win.isDestroyed() &&
+          (win.isVisible() || win.isMinimized()) &&
+          !win.webContents.getURL().includes('?blank=1'))
+        if (win) {
+          win.webContents.send(`request-${cmd.command}-break`)
+        } else {
+          log.info(`Stretchly: cannot ${cmd.command} break (source: cli): no active break window`)
+        }
+        break
+      }
+
       case 'pause': {
         log.info('Stretchly: pause Breaks (requested by second instance)')
         const duration = cmd.durationToMs(settings)
@@ -240,15 +261,6 @@ async function initialize (isAppStart = true) {
   }
   // TODO maybe we should not reinitialize but handle everything when we save new values for preferences
   log.info(`Stretchly: ${isAppStart ? '' : 're'}initializing...`)
-  const linuxDisplayBackend = getLinuxDisplayBackend(
-    app.commandLine.getSwitchValue('ozone-platform')
-  )
-  // TODO: Re-enable when Electron can unregister individual Wayland portal shortcuts.
-  endBreakShortcutSupported = linuxDisplayBackend !== 'wayland'
-  if (isAppStart && !endBreakShortcutSupported) {
-    log.info('Stretchly: end break shortcut disabled on native Wayland')
-  }
-
   EventEmitter.setMaxListeners(200) // for watching Store changes
   if (!settings) {
     settings = new Store({
@@ -792,7 +804,7 @@ function startMicrobreak () {
   ipcMain.handle('send-mini-break-data', (event) => {
     const startTime = Date.now()
     const shortcut = settings.get('endBreakShortcut')
-    if (shortcut && endBreakShortcutSupported) {
+    if (shortcut) {
       globalShortcut.register(shortcut, () => {
         log.info('Stretchly: end break shortcut pressed during Mini break')
         const passedPercent = (Date.now() - startTime) / breakDuration * 100
@@ -962,7 +974,7 @@ function startBreak () {
   ipcMain.handle('send-long-break-data', (event) => {
     const startTime = Date.now()
     const shortcut = settings.get('endBreakShortcut')
-    if (shortcut && endBreakShortcutSupported) {
+    if (shortcut) {
       globalShortcut.register(shortcut, () => {
         log.info('Stretchly: end break shortcut pressed during Long break')
         const passedPercent = (Date.now() - startTime) / breakDuration * 100
@@ -1575,18 +1587,18 @@ function showNotification (text) {
   )
 }
 
-ipcMain.on('postpone-mini-break', function (event) {
-  log.info('Stretchly: postpone button clicked during Mini break')
+ipcMain.on('postpone-mini-break', function (event, source = 'button') {
+  log.info(`Stretchly: postponement requested during Mini break (source: ${source})`)
   postponeMicrobreak()
 })
 
-ipcMain.on('postpone-long-break', function (event) {
-  log.info('Stretchly: postpone button clicked during Long break')
+ipcMain.on('postpone-long-break', function (event, source = 'button') {
+  log.info(`Stretchly: postponement requested during Long break (source: ${source})`)
   postponeBreak()
 })
 
-ipcMain.on('finish-mini-break', function (event, shouldPlaySound, manualAwaiting) {
-  log.info(`Stretchly: finish button clicked during Mini break (manualAwaiting: ${manualAwaiting})`)
+ipcMain.on('finish-mini-break', function (event, shouldPlaySound, manualAwaiting, source = 'button') {
+  log.info(`Stretchly: ${manualAwaiting ? 'finish' : 'skip'} requested during Mini break (source: ${source})`)
   if (manualAwaiting) {
     decreaseDanger(1)
   } else {
@@ -1595,8 +1607,8 @@ ipcMain.on('finish-mini-break', function (event, shouldPlaySound, manualAwaiting
   finishMicrobreak(shouldPlaySound)
 })
 
-ipcMain.on('finish-long-break', function (event, shouldPlaySound, manualAwaiting) {
-  log.info(`Stretchly: finish button clicked during Long break (manualAwaiting: ${manualAwaiting})`)
+ipcMain.on('finish-long-break', function (event, shouldPlaySound, manualAwaiting, source = 'button') {
+  log.info(`Stretchly: ${manualAwaiting ? 'finish' : 'skip'} requested during Long break (source: ${source})`)
   if (manualAwaiting) {
     decreaseDanger(2)
   } else {

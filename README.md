@@ -26,7 +26,7 @@ The latest official **installers** and **portable versions** for macOS, Windows 
 
 ### macOS
 
-Requires macOS Monterey (12) or later.
+Requires macOS Ventura (13) or later.
 
 It is recommended to install *Stretchly* with [Homebrew tap](https://github.com/hovancik/homebrew-stretchly) by running the following command.
 See [Application Signing](#application-signing) for details.
@@ -54,7 +54,7 @@ If you're using [Alfred](https://www.alfredapp.com) or [Raycast](https://www.ray
 
 #### Application Signing
 
-*Stretchly* is not signed (due to its costs and me not owning supported Apple device) so you will need to use a workaround for the first run. The workaround
+*Stretchly* is only ad-hoc signed (due to its costs and me not owning supported Apple device) so you will need to use a workaround for the first run. The workaround
 depends on if you're running an Intel or Apple Silicon chip.
 
 - **Intel Chips**: [Open a Mac app from an unidentified developer](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac).
@@ -594,7 +594,7 @@ You can help to translate Stretchly on [Weblate](https://hosted.weblate.org/enga
 
 
 ## Known issues
-- The end break shortcut is disabled on native Wayland because temporary global shortcuts cannot be reliably released. Use the break controls or start Stretchly with the X11 backend (`stretchly --ozone-platform=x11`). On KDE, remove any assignment created by an earlier Stretchly version once in System Settings > Keyboard > Shortcuts.
+- On KDE Wayland, global shortcuts can appear configured but fail to work; see [electron/electron#42573](https://github.com/electron/electron/issues/42573). Use the tray menu and break controls, or quit Stretchly and restart with `stretchly --ozone-platform=x11`.
 - Windows Store build's autostart is not working, so was disabled. To use autostart, install Stretchly with the [regular installer](https://github.com/hovancik/stretchly/releases), or create a shortcut to Stretchly from `shell:AppsFolder` (Win+R) and move it to the `shell:startup` folder (Win+R).
 - The Snap build may fail to start on native Wayland. Start it with the X11 backend (`stretchly --ozone-platform=x11`) as a workaround. See [#1693](https://github.com/hovancik/stretchly/issues/1693).
 - Wayland compositors choose which monitor receives regular windows. Stretchly labels each Linux break window (`Stretchly display 0`, `Stretchly display 1`, etc.) so compositor-specific rules can route it to the matching monitor. For Hyprland, add rules like these and replace the output names with yours:

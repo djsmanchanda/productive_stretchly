@@ -5,10 +5,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- CLI commands to postpone, skip and finish the current break
+
 ### Fixed
 - preserve Linux break window positions and label each target display in the window title for compositor-specific placement rules
 - add a `finish` command to close the active break without resetting the schedule
 - fix snap startup crash
+- improve Linux desktop integration
+- time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
+
+### Changed
+- macOS Ventura (13) or later is now required
+- macOS app bundles are now ad-hoc signed
+- updated many translations
 
 ## [1.22.1] - 2026-08-13
 ### Fixed
