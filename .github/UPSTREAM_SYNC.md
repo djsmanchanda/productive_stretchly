@@ -21,6 +21,12 @@ Run **Sync upstream** manually from `trunk` to retry a failed update. Enable
 `validate_branch` to run the checks even when upstream has no new commits.
 Concurrent sync runs are serialized so they cannot replace each other's candidate.
 
+If an upstream merge needs manual conflict or compatibility fixes, push a
+candidate branch that includes the current custom branch and the resolved merge.
+Enter that branch in `prepared_candidate` when dispatching from `trunk`. The
+workflow rejects candidates missing any current custom commits and still runs
+the full checks before fast-forwarding the custom branch.
+
 A failure creates one assigned attention issue with an owner mention. Further
 failures refresh its body with the latest run URL without adding comments or
 repeating the mention. A successful upstream update closes the issue; a later
